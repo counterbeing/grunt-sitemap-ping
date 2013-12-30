@@ -2,6 +2,8 @@
 
 > Ping Google, Bing, and Ask with your sitemap url.
 
+
+
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
 
@@ -18,6 +20,18 @@ grunt.loadNpmTasks('grunt-sitemap-ping');
 ```
 
 ## The "sitemap_ping" task
+
+This was created following instructions provided by the most popular search engines as follows. You should read through these real quick if you've never done this before.
+
+- [Google](https://support.google.com/webmasters/answer/183669?hl=en)
+- [Bing](https://support.google.com/webmasters/answer/183669?hl=en)
+- [Ask](https://support.google.com/webmasters/answer/183669?hl=en)
+
+### Gotchas
+
+- Google explicity tells you not to ping them more than once per hour, so if you're deploy often, you probably don't want to lump it in with your deploy task.
+- Google only allows you to resubmit like this, you must first submit using webmaster tools. They also say you won't see your sitemap has been resubmitted in webmaster tools like this. Please [read their words](https://support.google.com/webmasters/answer/183669?hl=en) on this.
+
 
 ### Overview
 In your project's Gruntfile, add a section named `sitemap_ping` to the data object passed into `grunt.initConfig()`.
