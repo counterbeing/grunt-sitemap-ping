@@ -1,6 +1,8 @@
+# WORK IN PROGRESS: JUST MAKING IT WORK NOW!
+
 # grunt-sitemap-ping
 
-> Ping Google, Bing, and Ask with your sitemap url.
+> Ping Google and Bing with your sitemap url.
 
 
 
@@ -24,8 +26,7 @@ grunt.loadNpmTasks('grunt-sitemap-ping');
 This was created following instructions provided by the most popular search engines as follows. You should read through these real quick if you've never done this before.
 
 - [Google](https://support.google.com/webmasters/answer/183669?hl=en)
-- [Bing](https://support.google.com/webmasters/answer/183669?hl=en)
-- [Ask](https://support.google.com/webmasters/answer/183669?hl=en)
+- [Bing](http://www.bing.com/webmaster/help/how-to-submit-sitemaps-82a15bd4)
 
 ### Gotchas
 
@@ -51,18 +52,17 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.checkForSitemap
+Type: `Boolean`
+Default value: `true`
 
-A string value that is used to do something with whatever.
+If it's true it will make sure it can access your specified sitemap file, and will halt at an error if it doesn't recieve a 200 response from the server. 
 
 #### options.sitemapUrl
 Type: `String`
 Default value: `<hostname from package.json>/sitemap.xml`
 
-This is the url of sitemap you wish to have submitted.
-
+This is the actual URL (or array of urls)
 ### Usage Examples
 
 #### Default Options

@@ -9,41 +9,33 @@
 'use strict';
 
 module.exports = function(grunt) {
+  grunt.registerMultiTask('sitemap_ping', 'Ping Google and Bing with your sitemap url.', function() {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+    var submissionUrl["Google"] = "http://www.google.com/webmasters/tools/ping?sitemap=";
+    var submissionUrl["Bing"] = "http://www.bing.com/ping?sitemap=";
 
-  grunt.registerMultiTask('sitemap_ping', 'Ping Google, Bing, and Ask with your sitemap url.', function() {
+    // Get the sitemap url, or guess it based on package json.
+    var url = this.data.homepage || grunt.config.get('pkg.homepage');
+
+    // Freak out if we don't know where the sitemap is. 
+    var homeErrMess = "You didn't specify a hompage in your package.json, and it's also not in your options... I can't go on.";
+    if (!url) {
+      grunt.fail.warn(homeErrMess, 3);
+    }
+    if (url.slice(-1) !== '/') {
+      url += '/';
+    }
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      sitemapLocation: 'somewhere',
+      checkForSitemap: 'true'
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+    http.get("http://www.corylogan.com/sitemap.xml", function(res) {
+      if (res.statusCode === 200) {
+        grunt.log.ok("Looked at remote location for sitemap and found it successfully...")
+      }
     });
   });
 
