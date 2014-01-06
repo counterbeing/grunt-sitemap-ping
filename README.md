@@ -58,7 +58,7 @@ Default value: `true`
 
 If it's true it will make sure it can access your specified sitemap file, and will halt at an error if it doesn't recieve a 200 response from the server. 
 
-#### options.sitemapUrl
+#### options.sitemapLocation
 Type: `String`
 Default value: `<hostname from package.json>/sitemap.xml`
 

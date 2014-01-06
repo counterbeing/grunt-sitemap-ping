@@ -1,48 +1,43 @@
 'use strict';
 
+/* global describe, it, xit, before, beforeEach, after, afterEach */
+
 var grunt = require('grunt');
+var lib   = require('../lib/functions.js');
+var assert = require("assert");
 
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
 
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
+describe('fullURL', function() {
+  it('returns the full url with sitemap as query parameter', function() {
+    assert.equal(
+      lib.fullURL(
+        'http://www.google.com/webmasters/tools/ping?sitemap=',
+        'http://www.corylogan.com/sitemap.xml'
+    ),
+      'http://www.google.com/webmasters/tools/ping?sitemap=http%3A%2F%2Fwww.corylogan.com%2Fsitemap.xml' 
+    );
+  });
+});
 
-exports.sitemap_ping = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
-  default_options: function(test) {
-    test.expect(1);
+describe('formatSitemapURLs', function() {
+  it('returns an array wether provided an array or a string', function() {
+    assert.deepEqual(
+      lib.formatSitemapURLs('http://example.com'),
+      ['http://example.com']
+    );
+  });
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+  it('returns an array of strings when passed one', function() {
+    assert.deepEqual(
+      lib.formatSitemapURLs(['string1','string2']),
+      ['string1','string2']
+    );
+  });
+});
 
-    test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-    test.done();
-  },
-};
+describe('getUrls', function(){
+  // Not quite sure how to test this one as it requires variables from
+  // the gruntfile and package.json
+  xit('should provide me with my homepage', function () {
+  });
+});
